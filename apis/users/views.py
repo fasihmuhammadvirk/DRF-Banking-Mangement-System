@@ -4,7 +4,7 @@ from django.views.generic import View, RedirectView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
-from api.users.models import User
+from apis.users.models import User
 
 
 class LoginPageView(LoginView):

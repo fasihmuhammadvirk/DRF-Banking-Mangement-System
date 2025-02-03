@@ -4,8 +4,8 @@ from django.views.generic import ListView, CreateView, FormView
 
 from api.accounts.models import Account
 
-from api.transactions.utils import validate_and_process_transaction
-from api.transactions.models import Transaction
+from apis.transactions.utils import validate_and_process_transaction
+from apis.transactions.models import Transaction
 
 
 class TransactionListView(LoginRequiredMixin, ListView):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.transactions.models import Transaction
+from apis.transactions.models import Transaction
 
 
 # Register your models here.
