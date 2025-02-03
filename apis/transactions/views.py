@@ -1,49 +1,30 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, FormView
-
-from apis.accounts.models import Account
-from apis.transactions.forms import MakeTransactionForm
-
-from apis.transactions.utils import validate_and_process_transaction
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework import status
 from apis.transactions.models import Transaction
+from apis.accounts.models import Account
+from apis.transactions.serializers import TransactionSerializer
 
+class TransactionListCreateView(generics.ListCreateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
 
-class TransactionListView(LoginRequiredMixin, ListView):
-    model = Transaction
-    template_name = 'transactions/transaction_history.html'
-    context_object_name = 'all_user_transaction'
-    login_url = 'login/'
-    redirect_field_name = 'next'
+    def list(self, request, *args, **kwargs):
+        """Retrieve transaction history by account_number."""
+        account_number = request.query_params.get('account_number')
 
-    def get_queryset(self, **kwargs):
-        account_number = self.kwargs.get('account_number')
-        user_account_data = Account.objects.get(account_number=account_number)
-        all_user_transaction = Transaction.objects.filter(account=user_account_data)
-        return all_user_transaction
+        if not account_number:
+            return Response({"error": "Account number is required."}, status=status.HTTP_400_BAD_REQUEST)
 
+        try:
+            account = Account.objects.get(account_number=account_number)
+        except Account.DoesNotExist:
+            return Response({"error": "Account not found."}, status=status.HTTP_404_NOT_FOUND)
 
-class TransactionCreateView(LoginRequiredMixin, FormView):
-    template_name = 'transactions/make_transaction.html'
-    form_class = MakeTransactionForm
-    login_url = 'login/'
-    redirect_field_name = 'next'
+        transactions = Transaction.objects.filter(account=account).order_by('-created_at')
+        serializer = TransactionSerializer(transactions, many=True, context={'account_number': account_number})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def form_valid(self, form):
-        context = dict()
-        account_number = self.kwargs.get('account_number')
-
-        amount_user_entered = int(form.cleaned_data['amount'])
-        transaction_type_user_select = form.cleaned_data['transaction_type']
-
-        is_transaction_successful = validate_and_process_transaction(
-            transaction_type_user_select,
-            amount_user_entered,
-            account_number)
-
-        if is_transaction_successful:
-            context['messages'] = ['Transaction Successful']
-        else:
-            context['messages'] = ['Please try again something went wrong']
-
-        return render(form, self.template_name, context)
+class TransactionRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer

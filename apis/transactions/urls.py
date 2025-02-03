@@ -1,8 +1,7 @@
 from django.urls import path
-from apis.transactions.views import TransactionListView, TransactionCreateView
+from apis.transactions.views import TransactionListCreateView, TransactionRetrieveUpdateDeleteView
+
 urlpatterns = [
-
-    path('history/<str:account_number>', TransactionListView.as_view(), name='transactions-list'),
-    path('make/<str:account_number>', TransactionCreateView.as_view(), name='make-transaction'),
-
+    path('api/', TransactionListCreateView.as_view(), name='transaction-list-create'),
+    path('api/<str:account_number>/', TransactionRetrieveUpdateDeleteView.as_view(), name='transaction-detail'),
 ]
