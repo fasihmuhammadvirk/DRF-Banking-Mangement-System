@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AccountListCreateView, AccountRetrieveUpdateDeleteView
+from apis.accounts.views import AccountListCreateView, AccountRetrieveUpdateDeleteView
 
 urlpatterns = [
     path('api/v1/', AccountListCreateView.as_view(), name='account-list-create'),

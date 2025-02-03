@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Account
-from .serializers import AccountSerializer
+from apis.accounts.models import Account
+from apis.accounts.serializers import AccountSerializer
 
 
 class AccountListCreateView(generics.ListCreateAPIView):
