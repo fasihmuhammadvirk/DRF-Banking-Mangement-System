@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.banks.views import BankListView, BankCreateView
+from apis.banks.views import BankListView, BankCreateView
 
 urlpatterns = [
 

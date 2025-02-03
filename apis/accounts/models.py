@@ -1,6 +1,6 @@
-from apps.banks.models import Bank
+from apis.banks.models import Bank
 from django.db import models
-from apps.users.models import User
+from apis.users.models import User
 from banking_management_system.models import BaseModel
 
 

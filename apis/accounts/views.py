@@ -1,4 +1,4 @@
-from apps.accounts.models import Account
+from apis.accounts.models import Account
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 

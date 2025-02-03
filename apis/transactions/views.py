@@ -2,11 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, FormView
 
-from apps.accounts.models import Account
-from apps.transactions.forms import MakeTransactionForm
+from apis.accounts.models import Account
+from apis.transactions.forms import MakeTransactionForm
 
-from apps.transactions.utils import validate_and_process_transaction
-from apps.transactions.models import Transaction
+from apis.transactions.utils import validate_and_process_transaction
+from apis.transactions.models import Transaction
 
 
 class TransactionListView(LoginRequiredMixin, ListView):
