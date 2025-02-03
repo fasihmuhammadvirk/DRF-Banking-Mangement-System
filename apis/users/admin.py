@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.users.models import User
+from apis.users.models import User
 from django.contrib.auth.models import Group
 
 admin.site.unregister(Group)

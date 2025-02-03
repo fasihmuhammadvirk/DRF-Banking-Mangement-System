@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.banks.models import Bank
+from apis.banks.models import Bank
 
 
 @admin.register(Bank)
