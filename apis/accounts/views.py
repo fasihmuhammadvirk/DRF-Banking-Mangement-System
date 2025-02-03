@@ -1,21 +1,13 @@
+from rest_framework import generics
 from apis.accounts.models import Account
-from django.views.generic import ListView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from apis.accounts.serializers import AccountSerializer
 
 
-class UserListView(LoginRequiredMixin, ListView):
-    model = Account
-    template_name = 'accounts/user_account_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user_account_list'] = Account.objects.filter(user=self.request.user)
-
-        return context
+class AccountListCreateView(generics.ListCreateAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
 
 
-class UserCreateView(LoginRequiredMixin, CreateView):
-    model = Account
-    template_name = 'accounts/create_account.html'
-    fields = ['balance', 'account_number', 'bank', 'user']
-    success_url = '/'
+class AccountRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
