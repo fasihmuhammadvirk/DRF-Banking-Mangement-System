@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, FormView
 
-from api.accounts.models import Account
+from apis.accounts.models import Account
 
 from apis.transactions.utils import validate_and_process_transaction
 from apis.transactions.models import Transaction
