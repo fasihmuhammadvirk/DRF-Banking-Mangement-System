@@ -1,19 +1,22 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView
+from rest_framework import generics
+from .models import Bank
+from .serializers import BankSerializer
 
-from api.banks.models import Bank
 
-
-class BankListView(LoginRequiredMixin, ListView):
-    model = Bank
-    template_name = 'banks/bank_list.html'
-    context_object_name = 'bank_list'
+class BankListCreateView(generics.ListCreateAPIView):
+    """
+    GET: List all banks
+    POST: Create a new bank
+    """
     queryset = Bank.objects.all()
-    login_url = 'login/'
-    redirect_field_name = 'next'
+    serializer_class = BankSerializer
 
-class BankCreateView(LoginRequiredMixin, CreateView):
-    model = Bank
-    fields = ['name', 'branch', 'is_islamic']
-    template_name = 'banks/create_bank.html'
-    success_url = "/"
+
+class BankRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET: Retrieve a specific bank
+    PATCH/PUT: Update a specific bank
+    DELETE: Delete a specific bank
+    """
+    queryset = Bank.objects.all()
+    serializer_class = BankSerializer
