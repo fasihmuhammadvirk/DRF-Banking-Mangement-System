@@ -1,8 +1,10 @@
-from django.urls import path
-from api.accounts.views import UserListView, UserCreateView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from api.accounts.views import AccountViewSet
+
+router = DefaultRouter()
+router.register(r'accounts', AccountViewSet, basename='account')
 
 urlpatterns = [
-
-    path("", UserListView.as_view(), name='accounts-list'),
-    path("create/", UserCreateView.as_view(), name='create-account')
+    path('', include(router.urls)),
 ]
