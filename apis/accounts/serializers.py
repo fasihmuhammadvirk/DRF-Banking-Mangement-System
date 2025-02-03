@@ -2,7 +2,8 @@ from rest_framework import serializers
 from apis.accounts.models import Account
 from apis.users.models import User
 from apis.banks.models import Bank
-ß
+
+
 class AccountSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True)  # User-provided username
     bankname = serializers.CharField(write_only=True)  # User-provided bank name
@@ -11,8 +12,8 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = ["id", "username", "bankname", "balance", "account_number", "user", "bank"]
         extra_kwargs = {
-            "user": {"read_only": True},  # Auto-set based on username
-            "bank": {"read_only": True},  # Auto-set based on bank name
+            "user": {"read_only": True},
+            "bank": {"read_only": True},
         }
 
     def validate(self, data):
