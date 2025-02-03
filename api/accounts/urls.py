@@ -1,10 +1,8 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from api.accounts.views import AccountViewSet
-
-router = DefaultRouter()
-router.register(r'accounts', AccountViewSet, basename='account')
+from django.urls import path
+from .views import AccountListCreateView, AccountRetrieveUpdateDeleteView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/v1/', AccountListCreateView.as_view(), name='account-list-create'),
+    path('api/v1/<int:pk>/', AccountRetrieveUpdateDeleteView.as_view(), name='account-detail'),
+
 ]
