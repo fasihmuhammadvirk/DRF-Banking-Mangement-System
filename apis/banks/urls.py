@@ -1,9 +1,7 @@
 from django.urls import path
-from api.banks.views import BankListView, BankCreateView
+from apis.banks.views import BankListCreateView, BankRetrieveUpdateDeleteView
 
 urlpatterns = [
-
-    path('', BankListView.as_view(), name='banks-list'),
-    path('create', BankCreateView.as_view(), name='create-bank' )
-
+    path('apis/v1/', BankListCreateView.as_view(), name='bank-list-create'),  # List & Create
+    path('apis/v1/<int:pk>/', BankRetrieveUpdateDeleteView.as_view(), name='bank-detail'),  # Retrieve, Update & Delete
 ]
