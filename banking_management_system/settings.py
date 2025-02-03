@@ -26,10 +26,10 @@ DEFAULT_APPS = [
 ]
 
 PROJECT_APPS = [
-    'api.banks',
-    'api.accounts',
-    'api.transactions',
-    'api.users',
+    'apis.banks',
+    'apis.accounts',
+    'apis.transactions',
+    'apis.users',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS

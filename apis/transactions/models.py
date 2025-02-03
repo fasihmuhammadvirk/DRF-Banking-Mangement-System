@@ -1,8 +1,8 @@
 from django.db import models
 
-from apis.accounts.models import Account
+from api.accounts.models import Account
 from banking_management_system.models import BaseModel
-from apis.transactions.choices import TRANSACTION_TYPES
+from api.transactions.choices import TRANSACTION_TYPES
 
 
 class Transaction(BaseModel):

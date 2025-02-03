@@ -1,5 +1,5 @@
-from apis.transactions.models import Transaction
-from apis.accounts.models import Account
+from api.transactions.models import Transaction
+from api.accounts.models import Account
 
 
 def validate_and_process_transaction(transaction_type_user_select: str,

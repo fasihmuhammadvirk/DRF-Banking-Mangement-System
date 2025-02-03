@@ -1,5 +1,5 @@
 from django.urls import path
-from apis.transactions.views import TransactionListView
+from api.transactions.views import TransactionListView
 urlpatterns = [
 
     path('history/<str:account_number>', TransactionListView.as_view(), name='transactions-list'),

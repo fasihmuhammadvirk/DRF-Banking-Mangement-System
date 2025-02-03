@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 
-from apis.banks.models import Bank
+from api.banks.models import Bank
 
 
 class BankListView(LoginRequiredMixin, ListView):
