@@ -16,20 +16,20 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 DEFAULT_APPS = [
-    "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
 
 PROJECT_APPS = [
-    'apps.banks',
-    'apps.accounts',
-    'apps.transactions',
-    'apps.users',
+    'api.banks',
+    'api.accounts',
+    'api.transactions',
+    'api.users',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS
@@ -102,23 +102,5 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# unfold admin site UI settings
-UNFOLD = {
-    "SITE_TITLE": "BMS Admin",
-    "SITE_HEADER": "BMS Admin",
-    "SITE_URL": '/user'
-}
