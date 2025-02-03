@@ -1,7 +1,6 @@
 from django.urls import path
 from apis.banks.views import BankListView, BankCreateView
 
-
 urlpatterns = [
 
     path('', BankListView.as_view(), name='banks-list'),
